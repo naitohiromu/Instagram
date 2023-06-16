@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import FirebaseCore    // 追加
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    // SVProgressHUDをXcode11以上で実行するための環境調整コード
+    var window: UIWindow?  // 追加する
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()    // 追加
         return true
     }
 
