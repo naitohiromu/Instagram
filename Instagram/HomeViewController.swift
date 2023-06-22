@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // カスタムセルを登録する
         let nib = UINib(nibName: "PostTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Cell")
+        //tableView.register(UINib(nibName:"CommentTableViewCell",bundle:nil), forCellReuseIdentifier: "CommentCell")
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,7 +45,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 // 取得したdocumentをもとにPostDataを作成し、postArrayの配列にする。
                 self.postArray = querySnapshot!.documents.map { document in
                     let postData = PostData(document: document)
-                    print("DEBUG_PRINT: \(postData)")
+                    //print("DEBUG_PRINT: \(postData)")
                     return postData
                 }
                 // TableViewの表示を更新する
@@ -66,17 +67,19 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         // セルを取得してデータを設定する
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PostTableViewCell
         cell.setPostData(postArray[indexPath.row])
-
+        cell.commentTextField.text = cell.commentTextField.text
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleButton(_:forEvent:)), for: .touchUpInside)
-
+        
         cell.commentButton.addTarget(self, action: #selector(handlecommentButton(_:forEvent:)), for:.touchUpInside)
-
+        //cell.commentTextField.text = cell.commentTextField.text
         //cell.commentTextField.addTarget(self, action: #selector(handlecommentTextField(_:forEvent:)), for:.editingDidBegin)
         return cell
+        
     }
     
     
@@ -88,30 +91,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let touch = event.allTouches?.first
         let point = touch!.location(in: self.tableView)
         let indexPath = tableView.indexPathForRow(at: point)
-        print(indexPath!.row)
+        //print(indexPath!.row)
         // 配列からタップされたインデックスのデータを取り出す
         let postData = postArray[indexPath!.row]
         
         var cell = tableView.cellForRow(at: indexPath!) as! PostTableViewCell
         let text:String = cell.commentTextField.text!
-        // likesを更新する
-        //let myid = Auth.auth().currentUser?.uid
-        // 更新データを作成する
-        //var updateValue: FieldValue
-        
         // commentsを更新する
         if let user = Auth.auth().currentUser{
             if (text != ""){
                 let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-                
-                //print(postData.likes.count)
-                //print(postData)
-                print(postRef)
-                //print(updateValue)
-                //print(myid)
-                //print(user)
-                postRef.setData((["comments":[cell.commentTextField.text:user.displayName]]), merge: true)
-                //postRef.updateData([cell.commentTextField.text: postData.name])
+                var updateValue: FieldValue
+                var namecomment = user.displayName!+":"+cell.commentTextField.text!
+                updateValue = FieldValue.arrayUnion([namecomment])
+                postRef.setData((["comments":updateValue]), merge: true)
             }
         }
     }

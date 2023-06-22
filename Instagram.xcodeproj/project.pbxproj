@@ -23,8 +23,6 @@
 		116FF2B22A3BF2440070F7D5 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FF2B12A3BF2440070F7D5 /* PostData.swift */; };
 		116FF2B52A3BF2960070F7D5 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FF2B32A3BF2960070F7D5 /* PostTableViewCell.swift */; };
 		116FF2B62A3BF2960070F7D5 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116FF2B42A3BF2960070F7D5 /* PostTableViewCell.xib */; };
-		116FF2B92A3C4A9A0070F7D5 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FF2B72A3C4A9A0070F7D5 /* CommentTableViewCell.swift */; };
-		116FF2BA2A3C4A9A0070F7D5 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 116FF2B82A3C4A9A0070F7D5 /* CommentTableViewCell.xib */; };
 		6BD5B4DDA075000F4A85C984 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CF8375F8E77F01EDA1B73E /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +45,6 @@
 		116FF2B12A3BF2440070F7D5 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		116FF2B32A3BF2960070F7D5 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		116FF2B42A3BF2960070F7D5 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
-		116FF2B72A3C4A9A0070F7D5 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
-		116FF2B82A3C4A9A0070F7D5 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		34432A2424A922E00599C75F /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 		80C557E91AC642738D4659F2 /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
 		89CF8375F8E77F01EDA1B73E /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,8 +94,6 @@
 				116FF2AF2A3BD3060070F7D5 /* Const.swift */,
 				116FF2B12A3BF2440070F7D5 /* PostData.swift */,
 				116FF2B32A3BF2960070F7D5 /* PostTableViewCell.swift */,
-				116FF2B72A3C4A9A0070F7D5 /* CommentTableViewCell.swift */,
-				116FF2B82A3C4A9A0070F7D5 /* CommentTableViewCell.xib */,
 				116FF2B42A3BF2960070F7D5 /* PostTableViewCell.xib */,
 				113E4BE92A37EF64004FFF96 /* Main.storyboard */,
 				113E4BEC2A37EF66004FFF96 /* Assets.xcassets */,
@@ -188,7 +182,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				113E4BF02A37EF66004FFF96 /* LaunchScreen.storyboard in Resources */,
-				116FF2BA2A3C4A9A0070F7D5 /* CommentTableViewCell.xib in Resources */,
 				116FF2B62A3BF2960070F7D5 /* PostTableViewCell.xib in Resources */,
 				113E4C142A380ECB004FFF96 /* GoogleService-Info.plist in Resources */,
 				113E4BED2A37EF66004FFF96 /* Assets.xcassets in Resources */,
@@ -252,7 +245,6 @@
 				113E4C122A3809A4004FFF96 /* SettingViewController.swift in Sources */,
 				113E4C0C2A380830004FFF96 /* LoginViewController.swift in Sources */,
 				116FF2B22A3BF2440070F7D5 /* PostData.swift in Sources */,
-				116FF2B92A3C4A9A0070F7D5 /* CommentTableViewCell.swift in Sources */,
 				113E4C0A2A380579004FFF96 /* ImageSelectViewController.swift in Sources */,
 				113E4BE42A37EF64004FFF96 /* AppDelegate.swift in Sources */,
 				113E4BE62A37EF64004FFF96 /* SceneDelegate.swift in Sources */,

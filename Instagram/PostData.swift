@@ -16,7 +16,7 @@ class PostData: NSObject {
     var date = ""
     var likes: [String] = []
     //var comments:[String] = []
-    var comments = ""
+    var comments:[String] = []
     //var comment_name = ""
     var isLiked: Bool = false
     
@@ -50,7 +50,7 @@ class PostData: NSObject {
                 self.isLiked = true
             }
         }
-        if let comments = postDic["comments"] as? String {
+        if let comments = postDic["comments"] as? [String] {
             self.comments = comments
         }
     }

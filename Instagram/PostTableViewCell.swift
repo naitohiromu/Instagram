@@ -17,6 +17,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
     
     // PostDataの内容をセルに表示
     func setPostData(_ postData: PostData) {
@@ -36,6 +37,9 @@ class PostTableViewCell: UITableViewCell {
         
         //コメントの内容
         //self.commentTextField.text = postData.comment
+        
+        self.commentLabel.text = postData.comments.joined(separator:",")
+        
         // いいね数の表示
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
