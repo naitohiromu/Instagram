@@ -16,6 +16,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // Firestoreのリスナー
     var listener: ListenerRegistration?
     
+    // コメントを格納
+    var commentHolder = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -69,33 +72,79 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleButton(_:forEvent:)), for: .touchUpInside)
-        
+
+        cell.commentButton.addTarget(self, action: #selector(handlecommentButton(_:forEvent:)), for:.touchUpInside)
+
+        //cell.commentTextField.addTarget(self, action: #selector(handlecommentTextField(_:forEvent:)), for:.editingDidBegin)
         return cell
     }
-    // セル内のボタンがタップされた時に呼ばれるメソッド
-    @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {
-        print("DEBUG_PRINT: likeボタンがタップされました。")
-
+    
+    
+    //コメントボタンを押したとき
+    @objc func handlecommentButton(_ sender: UIButton, forEvent event: UIEvent){
+        print("DEBUG_PRINT: commentボタンがタップされました。")
+        
         // タップされたセルのインデックスを求める
         let touch = event.allTouches?.first
         let point = touch!.location(in: self.tableView)
         let indexPath = tableView.indexPathForRow(at: point)
-
+        print(indexPath!.row)
         // 配列からタップされたインデックスのデータを取り出す
         let postData = postArray[indexPath!.row]
+        
+        var cell = tableView.cellForRow(at: indexPath!) as! PostTableViewCell
+        let text:String = cell.commentTextField.text!
+        // likesを更新する
+        //let myid = Auth.auth().currentUser?.uid
+        // 更新データを作成する
+        //var updateValue: FieldValue
+        
+        // commentsを更新する
+        if let user = Auth.auth().currentUser{
+            if (text != ""){
+                let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+                
+                //print(postData.likes.count)
+                //print(postData)
+                print(postRef)
+                //print(updateValue)
+                //print(myid)
+                //print(user)
+                postRef.setData((["comments":[cell.commentTextField.text:user.displayName]]), merge: true)
+                //postRef.updateData([cell.commentTextField.text: postData.name])
+            }
+        }
+    }
+    
+    // セル内のボタンがタップされた時に呼ばれるメソッド
+    @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {
+        print("DEBUG_PRINT: likeボタンがタップされました。")
 
+        //print(commentHolder)
+        // タップされたセルのインデックスを求める
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        print(point.x,point.y)
+        let indexPath = tableView.indexPathForRow(at: point)
+        print(indexPath!.row)
+        // 配列からタップされたインデックスのデータを取り出す
+        let postData = postArray[indexPath!.row]
+        //print(postData)
         // likesを更新する
         if let myid = Auth.auth().currentUser?.uid {
             // 更新データを作成する
             var updateValue: FieldValue
+            
             if postData.isLiked {
                 // すでにいいねをしている場合は、いいね解除のためmyidを取り除く更新データを作成
                 updateValue = FieldValue.arrayRemove([myid])
-            } else {
+            }
+            
+            else {
                 // 今回新たにいいねを押した場合は、myidを追加する更新データを作成
                 updateValue = FieldValue.arrayUnion([myid])
             }
-            // likesに更新データを書き込む
+            
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
             postRef.updateData(["likes": updateValue])
         }

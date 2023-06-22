@@ -14,6 +14,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var captionLabel: UILabel!
     
     // PostDataの内容をセルに表示
@@ -29,6 +31,11 @@ class PostTableViewCell: UITableViewCell {
         // 日時の表示
         self.dateLabel.text = postData.date
 
+        //コメントの表示
+        //self.commentLabel.text = "\(postData.comment_name) : \(postData.comment)"
+        
+        //コメントの内容
+        //self.commentTextField.text = postData.comment
         // いいね数の表示
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"

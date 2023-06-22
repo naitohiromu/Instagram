@@ -15,8 +15,11 @@ class PostData: NSObject {
     var caption = ""
     var date = ""
     var likes: [String] = []
+    //var comments:[String] = []
+    var comments = ""
+    //var comment_name = ""
     var isLiked: Bool = false
-
+    
     init(document: QueryDocumentSnapshot) {
         self.id = document.documentID
 
@@ -41,15 +44,18 @@ class PostData: NSObject {
         }
 
         if let myid = Auth.auth().currentUser?.uid {
-            // likesの配列の中にmyidが含まれているかチェックすることで、自分がいいねを押しているかを判断
+            //likesの配列の中にmyidが含まれているかチェックすることで、自分がいいねを押しているかを判断
             if self.likes.firstIndex(of: myid) != nil {
                 // myidがあれば、いいねを押していると認識する。
                 self.isLiked = true
             }
         }
+        if let comments = postDic["comments"] as? String {
+            self.comments = comments
+        }
     }
 
     override var description: String {
-        return "PostData: name=\(name); caption=\(caption); date=\(date); likes=\(likes.count); id=\(id);"
+        return "PostData: name=\(name); caption=\(caption); date=\(date); likes=\(likes.count); id=\(id); comments=\(comments);"
     }
 }
